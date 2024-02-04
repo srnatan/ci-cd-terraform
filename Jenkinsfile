@@ -1,6 +1,6 @@
 #!/bien/env/grooy
 
-node ('terraform') {
+node ('Jenkins') {
     try {
         checkout scmGit(
         branches: [[name: '*/main']], 
@@ -9,7 +9,7 @@ node ('terraform') {
                 [credentialsId: 'git-token', url: 'https://github.com/srnatan/ci-cd-terraform']
             ]
         )
-        
+
         sh 'ls -l'
     }
     catch(caughtError){
