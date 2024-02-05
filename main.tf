@@ -2,9 +2,9 @@ resource "aws_s3_bucket" "terraform_state_cicd" {
   bucket = "cloudcamp-terraform-state-cicd-jonatan"
 }
 
-# resource "aws_s3_bucket" "terraform_static_buckets"{
-#   bucket = "cloudcamp-static-buckets"
-# }
+resource "aws_s3_bucket" "terraform_static_buckets"{
+  bucket = "cloudcamp-static-buckets-jonatan"
+}
 
 terraform {
   backend "s3" {
