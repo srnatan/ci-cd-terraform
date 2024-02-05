@@ -34,9 +34,9 @@ node ('Jenkins') {
                 sh 'terraform plan -out tfplan'
             }
 
-            stage('Apply') {
-                sh 'terraform apply'
-            }
+            // stage('Apply') {
+            //     sh 'terraform apply'
+            // }
         }
         
     }
