@@ -20,7 +20,7 @@ node ('Jenkins') {
                       accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                       secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
         {
- 
+
             stage('Init') {
                 sh 'terraform init'
             }
