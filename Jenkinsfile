@@ -1,6 +1,7 @@
 #!/bien/env/groovy
 
 node ('Jenkins') {
+    err = null
     try {
         stage('Checkout') {
             checkout scmGit(
@@ -36,7 +37,10 @@ node ('Jenkins') {
         err = caughtError
     }
     finally{
-        // cleanWs()
+        cleanWs()
+        if(err){
+            throw err
+        }
     }
 }
     
