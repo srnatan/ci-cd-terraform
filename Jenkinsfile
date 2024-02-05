@@ -15,21 +15,28 @@ node ('Jenkins') {
             sh 'ls -l'
         }
 
-        stage('Init') {
-            sh 'terraform init'
-        }
+        withCredentials([[ $class: 'AmazonWebServicesCredentialsBinding',
+                      credentialsId : 'aws-credentials',
+                      accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
+        {
 
-        stage('Validate') {
-            sh '''terraform fmt
-            terraform validate'''
-        }
+            stage('Init') {
+                sh 'terraform init'
+            }
 
-        stage('Plan') {
-            sh 'terraform plan -out tfplan'
-        }
+            stage('Validate') {
+                sh '''terraform fmt
+                terraform validate'''
+            }
 
-        stage('Apply') {
-            sh 'terraform apply'
+            stage('Plan') {
+                sh 'terraform plan -out tfplan'
+            }
+
+            stage('Apply') {
+                sh 'terraform apply'
+            }
         }
         
     }
