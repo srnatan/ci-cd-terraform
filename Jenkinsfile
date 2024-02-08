@@ -4,7 +4,7 @@ node ('Jenkins') {
     err = null
     try {
         stage('Checkout') {
-            checkout scmGit(
+            gitscmvar=checkout scmGit(
             branches: [[name: '*/main']], 
             extensions: [], 
             userRemoteConfigs: [
@@ -13,7 +13,10 @@ node ('Jenkins') {
             )
 
             sh 'ls -l'
+            echo "${gitscmvar}"
         }
+
+        branch = 'main'
 
         withCredentials([[ $class: 'AmazonWebServicesCredentialsBinding',
                       credentialsId : 'aws-credentials',
@@ -35,7 +38,10 @@ node ('Jenkins') {
             }
 
             stage('Apply') {
-                sh 'terraform apply tfplan'
+                when(branch == 'main')
+                {
+                    sh 'terraform apply tfplan'
+                }
             }
         }
         
