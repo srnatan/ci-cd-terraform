@@ -46,7 +46,7 @@ node ('Jenkins') {
         }
         
     }
-    catch(caughtError){
+    catch(caughtError){  
         err = caughtError
     }
     finally{
